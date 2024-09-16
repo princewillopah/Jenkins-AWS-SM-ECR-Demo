@@ -1,0 +1,74 @@
+
+<!-- 
+ This is if you do not want to use the default nginx page during test
+You can use the official NGINX Docker image for testing. To pull it from Docker Hub, use the following command:
+Create or edit the index.html on your host machine using any text editor you prefer.
+Copy the new file to the container:
+
+
+            docker pull nginx
+            docker run -d -p 8081:80 nginx
+            docker cp index.html 0af19ccd3524:/usr/share/nginx/html/index.html 
+            
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>My Custom NGINX Page</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f4f4f9;
+                        color: #333;
+                        margin: 0;
+                        padding: 0;
+                        text-align: center;
+                    }
+                    header {
+                        background-color: #008cba;
+                        color: white;
+                        padding: 20px;
+                        font-size: 2em;
+                    }
+                    section {
+                        margin: 20px;
+                        padding: 20px;
+                    }
+                    h1 {
+                        color: #444;
+                    }
+                    .content {
+                        max-width: 800px;
+                        margin: auto;
+                        padding: 20px;
+                        background-color: white;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    }
+                    a {
+                        color: #008cba;
+                        text-decoration: none;
+                    }
+                    a:hover {
+                        text-decoration: underline;
+                    }
+                </style>
+            </head>
+            <body>
+                <header>
+                    Welcome to My Custom NGINX Page
+                </header>
+            
+                <section>
+                    <div class="content">
+                        <h1>Hello, World!</h1>
+                        <p>This is a custom page served by NGINX. You can modify the content here and style it using CSS. NGINX is a powerful web server that can handle large amounts of traffic efficiently.</p>
+                        <p>If you want to learn more about NGINX, check out <a href="https://nginx.org" target="_blank">NGINX official website</a>.</p>
+                    </div>
+                </section>
+            </body>
+</html>
+            
