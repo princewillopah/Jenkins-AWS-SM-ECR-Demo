@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        AWS_ACCOUNT_ID = credentials('id-of-your-credential')  //or AWS_ACCOUNT_ID = '4xxxxxxxx4'
+        AWS_ACCOUNT_ID = credentials('aws-account-id')  //or AWS_ACCOUNT_ID = '4xxxxxxxx4'
         AWS_REGION = credentials('aws-region')    // your region i.e  AWS_REGION = 'eu-north-1'
         ECR_REPOSITORY = 'nginx-custom' // Your ECR repository name
         IMAGE_TAG = "${BUILD_NUMBER}"                   // Use Jenkins build number as the image tag
