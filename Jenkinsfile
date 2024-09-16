@@ -17,38 +17,18 @@ pipeline {
             }
         }
         
-        stage('Login to AWS ECR') {
+        stage('Login to AWS-buil-tag-push-image') {
             steps {
                 script {
                     // Logging in to ECR
                     sh 'aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI'
-                }
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                script {
                     // Build your custom NGINX Docker image
                     sh 'docker build -t $ECR_REPOSITORY:$IMAGE_TAG .'
-                }
-            }
-        }
-
-        stage('Tag Docker Image') {
-            steps {
-                script {
                     // Tag the Docker image
                     sh 'docker tag $ECR_REPOSITORY:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG'
-                }
-            }
-        }
-
-        stage('Push Docker Image to ECR') {
-            steps {
-                script {
                     // Push the Docker image to ECR
                     sh 'docker push $REPOSITORY_URI:$IMAGE_TAG'
+
                 }
             }
         }
