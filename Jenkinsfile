@@ -5,6 +5,7 @@ pipeline {
         
         // AWS_ACCOUNT_ID = credentials('aws-account-id')  //or AWS_ACCOUNT_ID = '4xxxxxxxx3'
         // AWS_REGION = credentials('aws-region')    // your region i.e  AWS_REGION = 'eu-west-1'
+        GITHUB_CRED = credentials('github-aws-cred')
         AWS_ACCOUNT_ID = credentials('my-aws-account-id-sm')  // this will retriev the secrete from secret manager
         AWS_REGION = credentials('my-aws-region-sm')    // this will retriev the secrete from secret manager
         ECR_REPOSITORY = 'nginx-custom-image' // Your ECR repository name
@@ -21,6 +22,21 @@ pipeline {
         }
         
         stage('Login to AWS-buil-tag-push-image') {
+            steps {
+                script {
+                    // Logging in to ECR
+                    sh 'aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI'
+                    // Build your custom NGINX Docker image
+                    sh 'docker build -t $ECR_REPOSITORY:$IMAGE_TAG .'
+                    // Tag the Docker image
+                    sh 'docker tag $ECR_REPOSITORY:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG'
+                    // Push the Docker image to ECR
+                    sh 'docker push $REPOSITORY_URI:$IMAGE_TAG'
+
+                }
+            }
+        }
+        stage('List All Repositories in the account') {
             steps {
                 script {
                     // Logging in to ECR
