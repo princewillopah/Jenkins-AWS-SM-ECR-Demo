@@ -8,7 +8,7 @@ pipeline {
         GITHUB_CREDS = credentials('github-aws-cred')
         AWS_ACCOUNT_ID = credentials('my-aws-account-id-sm')  // this will retriev the secrete from secret manager
         AWS_REGION = credentials('my-aws-region-sm')    // this will retriev the secrete from secret manager
-        ECR_REPOSITORY = 'nginx-custom-image' // Your ECR repository name
+        ECR_REPOSITORY = 'custom-image-2' // Your ECR repository name
         IMAGE_TAG = "${BUILD_NUMBER}"                   // Use Jenkins build number as the image tag
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}"  // 4xxxxxxxx3.dkr.ecr.eu-west-1.amazonaws.com/nginx-custom
     }
