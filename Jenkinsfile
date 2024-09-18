@@ -17,7 +17,8 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Assuming your custom index.html is in the source code
-                git 'https://github.com/$GITHUB_CREDS_USR/Jenkins-AWS-SM-ECR-Demo.git'
+                // git 'https://github.com/$GITHUB_CREDS_USR/Jenkins-AWS-SM-ECR-Demo.git'
+                 git 'https://github.com/princewillopah/Jenkins-AWS-SM-ECR-Demo.git'
             }
         }
         
